@@ -5,6 +5,7 @@ import TodoItem from "@/types/TodoItem";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { GripVertical } from "lucide-react";
 
 const INITIAL_DATA: TodoItem[] = [];
 const NEW_TASK: TodoItem = {
@@ -49,7 +50,7 @@ const Todo = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg">
+    <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-100">
       <div className="flex flex-col justify-center items-center mb-8">
         <h1 className="text-center text-2xl font-semibold mb-4">
           My Todo list
@@ -59,11 +60,11 @@ const Todo = () => {
         </Button>
       </div>
 
-      <div ref={parent} className="flex flex-col space-y-5 mx-auto">
+      <div ref={parent} className="flex flex-col space-y-3.5 mx-auto">
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex items-center space-x-2 h-[20px] w-full"
+            className="flex flex-row items-center space-x-2 w-full py-4 px-4 rounded-md shadow-md bg-white"
           >
             <Checkbox
               checked={item.isCompleted}
@@ -96,7 +97,7 @@ const Todo = () => {
                     setValue(item.title);
                   }}
                   className={`
-                text-sm font-light leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 break-all transition duration-150
+                text-sm font-light leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 break-all transition duration-150 w-full
                 ${item.isCompleted && "line-through"}
               `}
                 >
@@ -104,6 +105,7 @@ const Todo = () => {
                 </p>
               )}
             </>
+            <GripVertical className="justify-self-end cursor-pointer text-gray-400" />
           </div>
         ))}
       </div>
