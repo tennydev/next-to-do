@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Header from "@/components/shared/Header";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-full h-full m-0 p-0 box-border mx-auto">
+        <div className="w-full h-fit min-h-screen bg-white pb-12 m-0 p-0 box-border mx-auto">
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              className: "",
+              style: {
+                fontSize: "12px",
+              },
+            }}
+          />
           <Header />
           {children}
         </div>
