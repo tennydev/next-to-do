@@ -77,7 +77,7 @@ const Todo = () => {
           My Todo list
         </h1>
         <Button onClick={handleAddTask} className="w-full">
-          +Task
+          + Task
         </Button>
       </div>
 
