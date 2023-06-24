@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { GripVertical } from "lucide-react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const INITIAL_DATA: TodoItem[] = [];
 const NEW_TASK: TodoItem = {
@@ -49,6 +50,26 @@ const Todo = () => {
     setData(temp);
   };
 
+  // a little function to help us with reordering the result
+  const reorder = (list: TodoItem[], startIndex: number, endIndex: number) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = (result: any) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(data, result.source.index, result.destination.index);
+
+    setData(items);
+  };
+
   return (
     <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-100">
       <div className="flex flex-col justify-center items-center mb-8">
@@ -60,55 +81,77 @@ const Todo = () => {
         </Button>
       </div>
 
-      <div ref={parent} className="flex flex-col space-y-3.5 mx-auto">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-row items-center space-x-2 w-full py-4 px-4 rounded-md shadow-md bg-white"
-          >
-            <Checkbox
-              checked={item.isCompleted}
-              id="terms2"
-              onClick={() => {
-                handleCheckTodo(index);
-              }}
-            />
-            <>
-              {isEditing === index ? (
-                <form
-                  className="w-full"
-                  onSubmit={(e) => {
-                    handleEditTodo(e);
-                  }}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="flex flex-col space-y-3.5 mx-auto"
+            >
+              {data.map((item, index) => (
+                <Draggable
+                  key={index}
+                  draggableId={`${item}-${index}`}
+                  index={index}
                 >
-                  <input
-                    autoFocus
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    type="text"
-                    placeholder="Jot something down..."
-                    className="text-sm font-light rounded-md w-full bg-transparent focus:outline-none"
-                  />
-                </form>
-              ) : (
-                <p
-                  onClick={() => {
-                    setIsEditing(index);
-                    setValue(item.title);
-                  }}
-                  className={`
-                text-sm font-light leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 break-all transition duration-150 w-full
-                ${item.isCompleted && "line-through"}
-              `}
-                >
-                  {item.title}
-                </p>
-              )}
-            </>
-            <GripVertical className="justify-self-end cursor-pointer text-gray-400" />
-          </div>
-        ))}
-      </div>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className="flex flex-row items-center space-x-2 w-full py-4 px-4 rounded-md shadow-md bg-white"
+                    >
+                      <Checkbox
+                        checked={item.isCompleted}
+                        id="terms2"
+                        onClick={() => {
+                          handleCheckTodo(index);
+                        }}
+                      />
+                      <>
+                        {isEditing === index ? (
+                          <form
+                            className="w-full"
+                            onSubmit={(e) => {
+                              handleEditTodo(e);
+                            }}
+                          >
+                            <input
+                              autoFocus
+                              onBlur={(e) => {handleEditTodo(e)}}
+                              value={value}
+                              onChange={(e) => setValue(e.target.value)}
+                              type="text"
+                              placeholder="Jot something down..."
+                              className="text-sm font-light rounded-md w-full bg-transparent focus:outline-none"
+                            />
+                          </form>
+                        ) : (
+                          <p
+                            onClick={() => {
+                              setIsEditing(index);
+                              setValue(item.title);
+                            }}
+                            className={`
+                        text-sm font-light leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 break-all transition duration-150 w-full
+                        ${item.isCompleted && "line-through"}
+                      `}
+                          >
+                            {item.title}
+                          </p>
+                        )}
+                      </>
+                      <GripVertical className="justify-self-end cursor-pointer text-gray-400" />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };
