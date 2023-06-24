@@ -89,7 +89,7 @@ const Todo = () => {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <div ref={parent} className="flex flex-col space-y-3.5 mx-auto">
+              <div ref={parent} className="flex flex-col space-y-2.5 mx-auto">
                 {data.map((item, index) => (
                   <Draggable
                     key={index}
