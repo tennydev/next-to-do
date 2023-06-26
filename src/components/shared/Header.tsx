@@ -1,5 +1,5 @@
 import { Button } from "../ui/button";
-import { SlidersHorizontal } from "lucide-react";
+import { ChevronLeft, SlidersHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,18 +12,19 @@ import {
 const Header = () => {
   return (
     <header className="h-fit w-full px-10 py-7 flex flex-row justify-between items-center">
-      <Button>Back</Button>
+      <Button variant={"link"}>
+        <ChevronLeft/>
+        day 
+        </Button>
       <DropdownMenu>
-        <DropdownMenuTrigger className="text-white bg-slate-900 p-2 rounded-md">
+        <DropdownMenuTrigger className="text-whiterounded-md">
           <SlidersHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>User</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>Log Out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

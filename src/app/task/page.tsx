@@ -73,7 +73,7 @@ const Todo = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-100">
+    <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200">
       <div
         className={`flex flex-row justify-between items-center ${
           data.length && "mb-6"
