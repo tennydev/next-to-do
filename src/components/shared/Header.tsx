@@ -11,13 +11,13 @@ import {
 
 const Header = () => {
   return (
-    <header className="h-fit w-full px-10 py-7 flex flex-row justify-between items-center">
+    <header className="h-fit w-full px-5 py-5 flex flex-row justify-between items-center">
       <Button variant={"link"}>
         <ChevronLeft/>
         day 
         </Button>
-      <DropdownMenu>
-        <DropdownMenuTrigger className="text-whiterounded-md">
+      <DropdownMenu >
+        <DropdownMenuTrigger className="pr-2 text-whiterounded-md">
           <SlidersHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent>

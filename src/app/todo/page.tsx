@@ -100,7 +100,7 @@ const Todo = () => {
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
-                        className="flex flex-row items-center space-x-2 w-full py-4 px-4 rounded-md shadow-md bg-white"
+                        className="flex flex-row items-center space-x-3 w-full py-4 px-4 rounded-md shadow-md bg-white"
                       >
                         <Checkbox
                           checked={item.isCompleted}
