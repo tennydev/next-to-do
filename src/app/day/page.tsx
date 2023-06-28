@@ -40,6 +40,7 @@ const Day = () => {
       </div>
 
       <div className="flex flex-col p-4 lg:w-2/3">
+        
         <div className="flex flex-col ">
           <div className="flex justify-center items-center">
             <Title size="h2">Schedule</Title>
@@ -49,6 +50,7 @@ const Day = () => {
             <div className="border rounded p-2">Right</div>
           </div>
         </div>
+
         <div className="flex flex-col ">
           <Title size="h3">Notes</Title>
           <textarea className="border rounded p-2 w-full h-32"></textarea>

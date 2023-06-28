@@ -5,7 +5,7 @@ import TodoItem from "@/types/TodoItem";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { GripVertical } from "lucide-react";
+import { GripVertical, Plus, Trash } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { successToast } from "@/lib/toast";
 
@@ -73,23 +73,31 @@ const Todo = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200">
-      <div
-        className={`flex flex-row justify-between items-center ${
-          data.length && "mb-6"
-        }`}
-      >
-        <h1 className="text-2xl font-semibold">My Todo list</h1>
-        <Button onClick={handleAddTask} className="w-fit">
-          + Task
-        </Button>
+    <div className="space-y-2.5">
+      <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200">
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl font-semibold">My Todo list</h1>
+          </div>
+          <div className="flex flex-row justify-between">
+          <Button onClick={handleAddTask} className="w-fit" variant="ghost">
+            <Plus />
+          </Button>
+
+          <Button onClick={handleAddTask} className="w-fit" variant="ghost">
+            <Trash />
+          </Button>
+          </div>
+       
       </div>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <div ref={parent} className="flex flex-col space-y-2.5 mx-auto">
+              <div
+                ref={parent}
+                className="flex flex-col space-y-2.5 max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200"
+              >
                 {data.map((item, index) => (
                   <Draggable
                     key={index}
@@ -100,7 +108,7 @@ const Todo = () => {
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
-                        className="flex flex-row items-center space-x-3 w-full py-4 px-4 rounded-md shadow-md bg-white"
+                        className="flex flex-row items-center space-x-3 w-full py-4 px-4 rounded-md shadow-md bg-white "
                       >
                         <Checkbox
                           checked={item.isCompleted}
