@@ -77,8 +77,8 @@ const Todo = () => {
       <div className="max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200">
         <div className="flex flex-col items-center">
           <h1 className="text-2xl font-semibold">My Todo list</h1>
-          </div>
-          <div className="flex flex-row justify-between">
+        </div>
+        <div className="flex flex-row justify-between">
           <Button onClick={handleAddTask} className="w-fit" variant="ghost">
             <Plus />
           </Button>
@@ -86,86 +86,87 @@ const Todo = () => {
           <Button onClick={handleAddTask} className="w-fit" variant="ghost">
             <Trash />
           </Button>
-          </div>
-       
+        </div>
       </div>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              <div
-                ref={parent}
-                className="flex flex-col space-y-2.5 max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200"
-              >
-                {data.map((item, index) => (
-                  <Draggable
-                    key={index}
-                    draggableId={`${item}-${index}`}
-                    index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        className="flex flex-row items-center space-x-3 w-full py-4 px-4 rounded-md shadow-md bg-white "
-                      >
-                        <Checkbox
-                          checked={item.isCompleted}
-                          id="terms2"
-                          onClick={() => {
-                            handleCheckTodo(index);
-                          }}
-                          className="mr-1"
-                        />
-                        <>
-                          {isEditing === index ? (
-                            <form
-                              className="w-full"
-                              onSubmit={(e) => {
-                                handleEditTodo(e);
-                              }}
-                            >
-                              <input
-                                autoFocus
-                                onBlur={(e) => {
+      {data.length > 0 && (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <div
+                  ref={parent}
+                  className="flex flex-col space-y-2.5 max-w-xl mx-auto p-6 shadow-lg rounded-lg bg-gray-200"
+                >
+                  {data.map((item, index) => (
+                    <Draggable
+                      key={index}
+                      draggableId={`${item}-${index}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          className="flex flex-row items-center space-x-3 w-full py-4 px-4 rounded-md shadow-md bg-white "
+                        >
+                          <Checkbox
+                            checked={item.isCompleted}
+                            id="terms2"
+                            onClick={() => {
+                              handleCheckTodo(index);
+                            }}
+                            className="mr-1"
+                          />
+                          <>
+                            {isEditing === index ? (
+                              <form
+                                className="w-full"
+                                onSubmit={(e) => {
                                   handleEditTodo(e);
                                 }}
-                                value={value}
-                                onChange={(e) => setValue(e.target.value)}
-                                type="text"
-                                placeholder="Jot something down..."
-                                className="text-sm font-light rounded-md w-full bg-transparent focus:outline-none"
-                              />
-                            </form>
-                          ) : (
-                            <p
-                              onClick={() => {
-                                setIsEditing(index);
-                                setValue(item.title);
-                              }}
-                              className={`
+                              >
+                                <input
+                                  autoFocus
+                                  onBlur={(e) => {
+                                    handleEditTodo(e);
+                                  }}
+                                  value={value}
+                                  onChange={(e) => setValue(e.target.value)}
+                                  type="text"
+                                  placeholder="Jot something down..."
+                                  className="text-sm font-light rounded-md w-full bg-transparent focus:outline-none"
+                                />
+                              </form>
+                            ) : (
+                              <p
+                                onClick={() => {
+                                  setIsEditing(index);
+                                  setValue(item.title);
+                                }}
+                                className={`
                         text-sm font-light leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 break-words transition duration-150 w-full
                         ${item.isCompleted && "line-through"}
                       `}
-                            >
-                              {item.title}
-                            </p>
-                          )}
-                        </>
-                        <div {...provided.dragHandleProps}>
-                          <GripVertical className="justify-self-end cursor-pointer text-gray-400" />
+                              >
+                                {item.title}
+                              </p>
+                            )}
+                          </>
+                          <div {...provided.dragHandleProps}>
+                            <GripVertical className="justify-self-end cursor-pointer text-gray-400" />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+                {provided.placeholder}
               </div>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
     </div>
   );
 };

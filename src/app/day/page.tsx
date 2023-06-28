@@ -1,5 +1,3 @@
-import Title from "@/components/shared/Title";
-
 const Day = () => {
   const today = new Date();
   const dateString = today.toLocaleDateString("en-US", {
@@ -9,25 +7,25 @@ const Day = () => {
     day: "numeric",
   });
   return (
-    <div className="flex flex-row px-4 pb-4">
-      <div className="flex flex-col space-y-4 lg:space-y-2 lg:space-x-4 p-4 lg:w-1/3">
-        <Title size="h2">Daily Plan</Title>
-        <span>{dateString}</span>
+    <div className="flex flex-row px-6 pb-4 ">
+      <div className="flex flex-col space-y-4 lg:space-x-4 p-4 lg:w-1/3">
+        <h1 className="title-h1">Daily Plan</h1>
+        <p className="w-fit px-4 py-4 shadow-lg rounded-lg bg-blue-100">{dateString}</p>
 
           <div className="flex flex-col">
-            <Title size="h3">Top Priorities</Title>
+            <h3 className="title-h3">Top Priorities</h3>
             <div className="flex flex-col space-y-2">
-              <div className="border rounded p-2">Priority 1</div>
-              <div className="border rounded p-2">Priority 2</div>
-              <div className="border rounded p-2">Priority 3</div>
+              <div className="border rounded p-2 bg-red-100">Priority 1</div>
+              <div className="border rounded p-2 bg-red-100">Priority 2</div>
+              <div className="border rounded p-2 bg-red-100">Priority 3</div>
             </div>
           </div>
 
-          <div className="flex flex-col space-y-4 ">
-            <Title size="h3">To-Do List</Title>
+          <div className="flex flex-col p-4 shadow-lg rounded-lg bg-lime-100">
+            <h3 className="title-h3">To-Do List</h3>
             <div className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2">
-                <input type="checkbox" />
+                <input type="checkbox"/>
                 <span>Todo 1</span>
               </div>
               <div className="flex items-center space-x-2">
@@ -40,20 +38,19 @@ const Day = () => {
       </div>
 
       <div className="flex flex-col p-4 lg:w-2/3">
-        
         <div className="flex flex-col ">
           <div className="flex justify-center items-center">
-            <Title size="h2">Schedule</Title>
+            <h2 className="title-h2">Schedule</h2>
           </div>
           <div className="flex flex-row justify-around">
             <div className="border rounded p-2">Left</div>
             <div className="border rounded p-2">Right</div>
           </div>
         </div>
-
-        <div className="flex flex-col ">
-          <Title size="h3">Notes</Title>
-          <textarea className="border rounded p-2 w-full h-32"></textarea>
+        
+        <div className="flex flex-col">
+          <h3 className="title-h3">Notes</h3>
+          <textarea className="border rounded p-2 w-full h-32 bg-orange-100"></textarea>
         </div>
       </div>
     </div>

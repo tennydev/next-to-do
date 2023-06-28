@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,8 +18,17 @@
   }
 } */
 
-
-
+@layer utilities {
+  .title-h1 {
+    @apply font-bold text-3xl mt-2 mb-2;
+  }
+  .title-h2 {
+    @apply font-bold text-2xl mt-2 mb-2;
+  }
+  .title-h3 {
+    @apply font-bold text-xl mt-2 mb-2;
+  }
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
